@@ -1,0 +1,42 @@
+<?php
+/**
+ * -------------------------------------------------------
+ *  PHP Active-JQuey 
+ *  Tentativa de criar um Jquery reativo. alternativa para construção
+ *  de front-end reativo com Jquery
+ * -------------------------------------------------------
+ * @author Daniels Hogans
+ * 
+ */
+define('PATHINFO', __DIR__.DIRECTORY_SEPARATOR);
+define('PAGESDIR', PATHINFO.DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR);
+define('LINKS', ['href']);
+$files = array_diff(scandir(PATHINFO), ['.', '..', 'PAJQ', '.git']);
+
+switch ($argv) {
+    case $argv[1] == 'compile':
+        $page = [];
+        $prec = array_diff(scandir(PAGESDIR), ['.', '..']);
+        foreach($prec as $key => $value)
+            {
+                $content = file_get_contents(PAGESDIR.$value);
+                $namepage = str_replace('.html', '', $value);
+                //preg_match_all('/href="(.*?html)"/', $content, $match);
+                $div = str_replace('.html', '', $content);
+                $div = str_replace('<page>', '<div id="P_'.$namepage.'">', $div);
+                $div = str_replace('</page>', '</div>', $div);
+                array_push($page, $div);
+            };
+        $indeName = 'index.html';
+        $index = file_get_contents(PATHINFO.$indeName);
+        $index = str_replace('<pajq></pajq>', implode('', $page), $index);
+        file_put_contents(PATHINFO.$indeName, $index);
+        echo 'Compilado com sucesso!';
+        
+    break;
+    
+    default:
+        # code...
+        break;
+}
+?>
