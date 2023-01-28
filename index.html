@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    <a href="teste">pagina 1</a>
+    <a href="teste2">pagina 2</a>
+    <br/>
+    <br/>
+    <div id="P_teste" >
+        nova pagina
+    </div>
+    <div id="P_teste2" >
+        segunda pagina
+    </div>
+</body>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('div[id^=P_]').hide();
+        $('a[href]').on('click', function(e){
+            e.preventDefault();
+            $('div[id^=P_]').hide();
+            $('#P_'+e.originalEvent.srcElement.attributes.href.value).show();
+            //window.location.href.value = e.originalEvent.srcElement.attributes.href.value;
+            //$('#'+window.location.href.value).hide();
+            
+            //window.location = e.originalEvent.srcElement.attributes.href.value;
+            //console.log(location.history);
+            //console.log(e.originalEvent);
+            //console.log(window.location);
+            //return false;
+        });
+        //var route = window.location.href
+    });
+    </script>
+</html>
