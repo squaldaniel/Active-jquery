@@ -22,8 +22,21 @@
     <a href="index">inicio</a>
     <br>
     <a href="pagina2">pagina 2</a>
+    <a id="uri" href="#">nova uri</a>
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="active-Jquery.js"></script>
+<script src="newquery.js"></script>
+<script>
+    $(document).ready(function() {
+        let uri = 'http://localhost/home';
+        window.history.pushState(uri, '', '/home');
+        console.log(uri);
+        $('#uri').click(function() {
+            var newUri = 'https://nova-uri.com/';
+            window.history.pushState(false, false, newUri);
+        });
+    });
+</script>
 </html>

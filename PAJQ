@@ -35,9 +35,13 @@ switch ($argv) {
         $newpage = preg_replace('/<body>(.*?)<\/body>/', implode('', $page), $index);
         file_put_contents(PATHINFO.$indeName, $newpage);
         echo 'Compilado com sucesso!';
-
     break;
-    
+    case $argv[1] == 'serve':
+        if(empty($argv[2])){
+            $argv[2] = '3280';
+        };
+        shell_exec("php -S localhost:".$argv[2]." -t ". PATHINFO);
+        break;
     default:
         # code...
         break;
