@@ -30,9 +30,10 @@ switch ($argv) {
         $indeName = 'index.html';
         $index = file_get_contents(PATHINFO.$indeName);
         $pages = implode('', $page);
-        echo $pages;
-        exit;
-        $newpage = preg_replace('/<body>(.*?)<\/body>/', implode('', $page), $index);
+        $start = strpos($index, "<body");
+        $end = strpos($index, "</body>");
+        $body = substr($index, $start, $end-$start+7);
+        $newpage = str_replace($body, $pages, $index);
         file_put_contents(PATHINFO.$indeName, $newpage);
         echo 'Compilado com sucesso!';
     break;
@@ -43,7 +44,7 @@ switch ($argv) {
         shell_exec("php -S localhost:".$argv[2]." -t ". PATHINFO);
         break;
     default:
-        # code...
+        echo "verifique o comando digitado!";
         break;
 }
 ?>
